@@ -33,9 +33,7 @@ export default function Categories() {
                 resizeMode: 'contain',
               }}
             />
-            <Text style={{ fontSize: 13, fontWeight: '900' }}>
-              {items[0].text}
-            </Text>
+            <Text style={{ fontSize: 13, fontWeight: '900' }}>{item.text}</Text>
           </View>
         ))}
         {/* loop ends */}
