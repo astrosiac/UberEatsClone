@@ -1,22 +1,24 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import MateralCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import localRestaurants from '../DummyData/localRestaurants';
 
-export const localRestaurant = [
-  {
-    name: 'Blah',
-    image_url: '../assets/images/bg1.png',
-    categories: ['Cafe', 'Bar'],
-    price: '$$',
-    reviews: 1234,
-    rating: 4.5,
-  },
-];
+// export const localRestaurants = [
+//   {
+//     name: 'Blah',
+//     image_url:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/220px-Restaurant_N%C3%A4sinneula.jpg',
+//     categories: ['Cafe', 'Bar'],
+//     price: '$$',
+//     reviews: 1234,
+//     rating: 4.7,
+//   },
+// ];
 
-export default function RestaurantItems() {
+export default function RestaurantItems(props) {
   return (
     <TouchableOpacity activeOpacity={1} style={{ maginBottom: 30 }}>
-      {localRestaurant.map((restaurant, index) => (
+      {props.restaurantData.map((restaurant, index) => (
         <View
           key={index}
           style={{ marginTop: 10, padding: 15, backgroundColor: ' white' }}>
