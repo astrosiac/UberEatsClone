@@ -4,14 +4,18 @@ import HeaderTabs from '../components/HeaderTabs';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import RestaurantItems from '../components/RestaurantItems';
-import { localRestaurants } from '../DummyData/localRestaurants';
-
-import axios from 'axios';
+// import { localRestaurants } from '../DummyData/localRestaurants';
+import { localRestaurants } from '../components/RestaurantItems';
+import axios, { Axios } from 'axios';
 
 const YELP_API_KEY =
   'Iiz3wiE8aYhgEnr0lT-oOoRqAEBJFm_F6IMAD4_rmvaMCGLv4C94ADoFauoelVy1iPFHG0rLON3pLbpzB6eGbNTPvhAz1aAWPN2YlJGQ7nvsNn4IlYY_suw-9Eb1YnYx';
 const config = {
   headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'x- requested - wth': 'XMLHttpRequest',
+    'Access-Control-Allow-Origin': '*',
     Authorization: `Bearer ${YELP_API_KEY}`,
   },
   params: {
@@ -25,6 +29,7 @@ const config = {
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
+  const [city, setCity] = useState('NYC');
   // const auth = {
   //   Authorization: `Bearer ${YELP_API_KEY}`,
   // };
@@ -40,37 +45,38 @@ export default function Home() {
   // };
 
   // getRest();
-  // const getRestaurantsFromYelp = async (req, res) => {
-  //   const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=NYC`;
-  //   const apiOptions = {
-  //     method: 'GET',
-  //     mode: 'no-coors',
-  //     headers: {
-  //       Authorization: `Bearer ${YELP_API_KEY}`,
-  //     },
-  //   };
-  //   return await fetch(yelpUrl, apiOptions)
-  //     .then((res) => res.json())
-  //     .then((json) => setRestaurantData(json.businesses));
-  // };
-
-  // useEffect(() => {
-  //   getRestaurantsFromYelp();
-
-  // }, []);
-  //   fetch(
-  //     'https://api.yelp.com/v3/businesses/search?term=restaurants&location=NYC',
-  //     { method: 'GET', headers: { Authorization: `Bearer ${YELP_API_KEY}` } }
-  //   )
-  //     .then((res) => res.json())
-  //     .then((json) => setRestaurantData(json.businesses));
-  // }, []);
+  const getRestaurantsFromYelp = async (req, res) => {
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=NYC`;
+    const apiOptions = {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Accept': 'application/json',
+        // 'Content-Type': 'application/json',
+        // 'x- requested - wth': 'XMLHttpRequest',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': `Bearer ${YELP_API_KEY}`,
+      },
+    };
+    // return await fetch(yelpUrl, apiOptions)
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     return setRestaurantData(json.businesses);
+    //   });
+    const response = await fetch(yelpUrl, apiOptions);
+    const { businesses } = await response.json();
+    setRestaurantData(businesses);
+    console.log(setRestaurantData(businesses));
+  }
+  useEffect(() => {
+    getRestaurantsFromYelp();
+  }, [city]);
 
   return (
     <SafeAreaView style={{ backgroundColor: '#eee', flex: 1 }}>
       <View style={{ backgroundColor: 'white', padding: 15 }}>
         <HeaderTabs />
-        <SearchBar />
+        <SearchBar cityHandler={setCity}/>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />

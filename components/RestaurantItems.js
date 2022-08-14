@@ -1,31 +1,32 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import MateralCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import localRestaurants from '../DummyData/localRestaurants';
+// import localRestaurants from '../DummyData/localRestaurants';
 
-// export const localRestaurants = [
-//   {
-//     name: 'Blah',
-//     image_url:
-//       'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/220px-Restaurant_N%C3%A4sinneula.jpg',
-//     categories: ['Cafe', 'Bar'],
-//     price: '$$',
-//     reviews: 1234,
-//     rating: 4.7,
-//   },
-// ];
+export const localRestaurants = [
+  {
+    name: 'Blah',
+    image_url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/220px-Restaurant_N%C3%A4sinneula.jpg',
+    categories: ['Cafe', 'Bar'],
+    price: '$$',
+    reviews: 1234,
+    rating: 4.7,
+  },
+];
 
 export default function RestaurantItems(props) {
+  console.log(props.restaurantData);
   return (
     <TouchableOpacity activeOpacity={1} style={{ maginBottom: 30 }}>
-      {props.restaurantData.map((restaurant, index) => (
+      {props.restaurantData.map((restaurant, index) => {
         <View
           key={index}
           style={{ marginTop: 10, padding: 15, backgroundColor: ' white' }}>
           <RestaurantImage image={restaurant.image_url} />
           <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
-        </View>
-      ))}
+        </View>;
+      })}
     </TouchableOpacity>
   );
 }
