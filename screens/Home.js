@@ -8,8 +8,7 @@ import { localRestaurants } from '../DummyData/localRestaurants';
 import BottomTabs from '../components/home/BottomTabs';
 // import { localRestaurants } from '../components/RestaurantItems';
 import { Divider } from 'react-native-elements';
-const YELP_API_KEY =
-  'Iiz3wiE8aYhgEnr0lT-oOoRqAEBJFm_F6IMAD4_rmvaMCGLv4C94ADoFauoelVy1iPFHG0rLON3pLbpzB6eGbNTPvhAz1aAWPN2YlJGQ7nvsNn4IlYY_suw-9Eb1YnYx';
+const YELP_API_KEY = '';
 const config = {
   headers: {
     Accept: 'application/json',
