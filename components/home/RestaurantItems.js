@@ -1,7 +1,7 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import MateralCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { localRestaurants } from '../DummyData/localRestaurants';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { foods } from '../../screens/RestaurantDetail';
 
 export const localRestaurants = [
   {
@@ -16,7 +16,6 @@ export const localRestaurants = [
 ];
 
 export default function RestaurantItems({ navigation, ...props }) {
-  console.log(props.restaurantData);
   return (
     <>
       {props.restaurantData.map((restaurant, index) => (
@@ -53,8 +52,8 @@ const RestaurantImage = (props) => (
       }}
       style={{ width: '100%', height: 180 }}
     />
-    <TouchableOpacity style={{ position: 'absolute', right: 20 }}>
-      <MateralCommunityIcons name='heart-outline' size={25} color='red' />
+    <TouchableOpacity style={{ position: 'absolute', right: 20, top: 20 }}>
+      <MaterialCommunityIcons name='heart-outline' size={25} color='#fff' />
     </TouchableOpacity>
   </>
 );
@@ -73,12 +72,12 @@ const RestaurantInfo = (props) => (
     </View>
     <View
       style={{
-        backgroundColor: 'lightgray',
+        backgroundColor: '#eee',
         height: 30,
         width: 30,
         alignItems: 'center',
-        borderRadius: 15,
         justifyContent: 'center',
+        borderRadius: 15,
       }}>
       <Text>{props.rating}</Text>
     </View>

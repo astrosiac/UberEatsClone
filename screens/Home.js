@@ -8,8 +8,7 @@ import { localRestaurants } from '../DummyData/localRestaurants';
 import BottomTabs from '../components/home/BottomTabs';
 // import { localRestaurants } from '../components/RestaurantItems';
 import { Divider } from 'react-native-elements';
-const YELP_API_KEY =
-  'Iiz3wiE8aYhgEnr0lT-oOoRqAEBJFm_F6IMAD4_rmvaMCGLv4C94ADoFauoelVy1iPFHG0rLON3pLbpzB6eGbNTPvhAz1aAWPN2YlJGQ7nvsNn4IlYY_suw-9Eb1YnYx';
+const YELP_API_KEY = '';
 const config = {
   headers: {
     Accept: 'application/json',
@@ -46,36 +45,36 @@ export default function Home({ navigation }) {
   // };
 
   // getRest();
-  // const getRestaurantsFromYelp = async () => {
-  //   const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
-  //   const apiOptions = {
-  //     method: 'GET',
-  //     mode: 'no-cors',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       // 'Content-Type': 'application/json',
-  //       // 'x- requested - wth': 'XMLHttpRequest',
-  //       'Access-Control-Allow-Origin': '*',
-  //       Authorization: `Bearer ${YELP_API_KEY}`,
-  //     },
-  //   };
-  //   // return await fetch(yelpUrl, apiOptions)
-  //   //   .then((res) => res.json())
-  //   //   .then((json) => {
-  //   //     return setRestaurantData(json.businesses);
-  //   //   });
-  //   const response = await fetch(yelpUrl, apiOptions);
-  //   const { businesses } = await response.json();
-  //   setRestaurantData(
-  //     businesses.filter((restaurant) =>
-  //       restaurant.transactions.includes(activeTab.toLowerCase())
-  //     )
-  //   );
-  //   console.log(setRestaurantData(businesses));
-  // };
-  // useEffect(() => {
-  //   getRestaurantsFromYelp();
-  // }, [city, activeTab]);
+  const getRestaurantsFromYelp = async () => {
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
+    const apiOptions = {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        Accept: 'application/json',
+        // 'Content-Type': 'application/json',
+        // 'x- requested - wth': 'XMLHttpRequest',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: `Bearer ${YELP_API_KEY}`,
+      },
+    };
+    // return await fetch(yelpUrl, apiOptions)
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     return setRestaurantData(json.businesses);
+    //   });
+    const response = await fetch(yelpUrl, apiOptions);
+    const { businesses } = await response.json();
+    setRestaurantData(
+      businesses.filter((restaurant) =>
+        restaurant.transactions.includes(activeTab.toLowerCase())
+      )
+    );
+    console.log(setRestaurantData(businesses));
+  };
+  useEffect(() => {
+    getRestaurantsFromYelp();
+  }, [city, activeTab]);
 
   return (
     <SafeAreaView style={{ backgroundColor: '#eee', flex: 1 }}>
